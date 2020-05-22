@@ -25,4 +25,5 @@ Known issues (pull requests are welcomed!):
 1. Can only work with original flac/wav file, otherwise may perform bad.
 2. Audio file must already be well-aligned at head and tail, otherwise the software will not find align points.
 3. Slight gliches with high-frequency voice.
-4. Still some BGM not filtered.
+4. Still little BGM not filtered.
+5. Takes astonishing time to process
