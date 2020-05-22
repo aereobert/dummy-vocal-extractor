@@ -1,4 +1,4 @@
-# dummy-vocal-extractor
+# dummy-vocal-extractor (main.py)
 
 This is a tool to extract instrumental track from your songs.
 Some code are from tsurumeso/vocal-remover, which is a deep-learning-based tool.
