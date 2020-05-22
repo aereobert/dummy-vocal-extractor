@@ -4,6 +4,8 @@ This is a tool to extract instrumental track from your songs.
 Some code are from tsurumeso/vocal-remover, which is a deep-learning-based tool.
 This dummy code is intented for generating deep-learning dataset.
 
+DISCLAIMER: ONLY INTENTED FOR GENERATING ML TRAINING DATASET, I AM NOT RESPONSIBLE FOR YOUR COPYRIGHT ISSUES, USE AT YOUR OWN RISK
+
 It takes 
 1. music with vocal
 2. music without vocal
