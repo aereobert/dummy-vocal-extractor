@@ -1,69 +1,28 @@
-# vocal-remover
+# dummy-vocal-extractor
 
-[![Release](https://img.shields.io/github/release/tsurumeso/vocal-remover.svg)](https://github.com/tsurumeso/vocal-remover/releases/latest)
-[![Release](https://img.shields.io/github/downloads/tsurumeso/vocal-remover/total.svg)](https://github.com/tsurumeso/vocal-remover/releases)
+This is a tool to extract instrumental track from your songs.
+Some code are from tsurumeso/vocal-remover, which is a deep-learning-based tool.
+This dummy code is intented for generating deep-learning dataset.
 
-This is a deep-learning-based tool to extract instrumental track from your songs.
+It takes 
+1. music with vocal
+2. music without vocal
 
-## Installation
+and generates vocal
 
-### Getting vocal-remover
-Download the latest version from [here](https://github.com/tsurumeso/vocal-remover/releases).
+by 
 
-### Install PyTorch
-See: [GET STARTED](https://pytorch.org/get-started/locally/)
+1. Upsample the audio file for more precise alignment (with cubic interpolating)
+2. Calculate alignment point for beginning and end of the audio file
+3. Cut audio, and align the audio by resampling
+4. Downsampling
 
-### Install the other packages
-```
-cd vocal-remover
-pip install -r requirements.txt
-```
+Advantages:
+1. Performs better than deep-learning-based system. (of course)
+2. Fixes sample alignment issues caused by software used by studios. (typically 1-50 samples for 44100HZ audio music file)
 
-## Usage
-The following command separates the input into instrumental and vocal tracks. They are saved as `*_Instruments.wav` and `*_Vocals.wav`.
-
-### Run on CPU
-```
-python inference.py --input path/to/an/audio/file
-```
-
-### Run on GPU
-```
-python inference.py --input path/to/an/audio/file --gpu 0
-```
-
-## Train your own model
-
-### Install SoundStretch
-```
-sudo apt install soundstretch
-```
-
-### Place your dataset
-```
-dataset/
-  +- instruments/
-  |    +- 01_foo_inst.wav
-  |    +- 02_bar_inst.mp3
-  |    +- ...
-  +- mixtures/
-       +- 01_foo_mix.wav
-       +- 02_bar_mix.mp3
-       +- ...
-```
-
-### Offline data augmentation
-```
-python augment.py -i dataset/instruments -m dataset/mixtures -p -1
-python augment.py -i dataset/instruments -m dataset/mixtures -p 1
-```
-
-### Train a model
-```
-python train.py -i dataset/instruments -m dataset/mixtures -M 0.5 -g 0
-```
-
-## References
-- [1] Jansson et al., "Singing Voice Separation with Deep U-Net Convolutional Networks", https://ismir2017.smcnus.org/wp-content/uploads/2017/10/171_Paper.pdf
-- [2] Takahashi et al., "Multi-scale Multi-band DenseNets for Audio Source Separation", https://arxiv.org/pdf/1706.09588.pdf
-- [3] Liutkus et al., "The 2016 Signal Separation Evaluation Campaign", Latent Variable Analysis and Signal Separation - 12th International Conference
+Known issues (pull requests are welcomed!):
+1. Can only work with original flac/wav file, otherwise may perform bad.
+2. Audio file must already be well-aligned at head and tail, otherwise the software will not find align points.
+3. Slight gliches with high-frequency voice.
+4. Still some BGM not filtered.
